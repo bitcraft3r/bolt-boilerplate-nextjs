@@ -32,14 +32,6 @@ export const Heading = () => {
                     </Button>
                 </SignInButton>
             )}
-            {isAuthenticated && !isLoading && (
-                <Button asChild>
-                    <Link href="#">
-                        <CirclePlus className="h-4 w-4 mr-2" />
-                        Create
-                    </Link>
-                </Button>
-            )}
         </div>
     );
 }

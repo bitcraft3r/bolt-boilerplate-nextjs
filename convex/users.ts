@@ -1,4 +1,5 @@
-import { mutation } from "./_generated/server";
+import { v } from "convex/values";
+import { QueryCtx, mutation, query } from "./_generated/server";
 
 /**
  * Insert or update the user in a Convex table then return the document's ID.
@@ -33,12 +34,16 @@ export const store = mutation({
             if (
                 user.tokenIdentifier !== identity.tokenIdentifier ||
                 user.clerkUserId !== identity.subject ||
+                user.pictureUrl !== identity.pictureUrl ||
+                user.username !== identity.nickname ||
                 user.email !== identity.email ||
                 user.name !== identity.name
             ) {
                 await ctx.db.patch(user._id, {
                     tokenIdentifier: identity.tokenIdentifier,
                     clerkUserId: identity.subject,
+                    pictureUrl: identity.pictureUrl,
+                    username: identity.nickname,
                     email: identity.email,
                     name: identity.name,
                 });
@@ -49,6 +54,8 @@ export const store = mutation({
         return await ctx.db.insert("users", {
             tokenIdentifier: identity.tokenIdentifier,
             clerkUserId: identity.subject,
+            pictureUrl: identity.pictureUrl!,
+            username: identity.nickname!,
             email: identity.email!,
             name: identity.name,
         });
