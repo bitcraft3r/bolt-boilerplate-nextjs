@@ -14,11 +14,11 @@ export const Heading = () => {
         <div className="max-w-3xl space-y-4">
             {/* Copy for Microblogging app */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
-                Unlimited Likes, Infinite Connections. It's <span className="underline">Liit</span>
+                Unlimited Likes, Infinite Connections. It&apos;s <span className="underline">Liit</span>
 
             </h1>
             <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-                Experience microblogging with limitless likes and seamless interactions powered by Convex's real-time database.
+                Experience microblogging with limitless likes and seamless interactions powered by Convex&apos;s real-time database.
             </h3>
 
             {/* Copy for Boilerplate for Devs */}
