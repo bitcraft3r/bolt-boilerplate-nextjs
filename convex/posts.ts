@@ -20,7 +20,7 @@ export const create = mutation({
             throw new Error("User not found");
         }
 
-        if (text.length <= 0 || text.length > 64) { // TODO: Increase max character limit?
+        if (text.length <= 0 || text.length > 99) {
             throw new Error("Message is empty or too long");
         }
 

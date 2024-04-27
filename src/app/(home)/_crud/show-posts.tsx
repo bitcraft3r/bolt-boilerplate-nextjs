@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "convex/react";
+import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Heart, Trash2 } from "lucide-react";
@@ -12,14 +12,35 @@ import { Id } from "../../../../convex/_generated/dataModel";
 dayjs.extend(relativeTime);
 
 const ShowPosts = () => {
+    const { isAuthenticated, isLoading } = useConvexAuth();
+
     const userId = useStoreUserEffect();
-    const allPosts = useQuery(api.posts.read);
+    let allPosts = useQuery(api.posts.read);
     const deletePost = useMutation(api.posts.del);
     const editPost = useMutation(api.posts.update);
 
     // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
 
-    // TODO: if user not authenticated / when this component used as Hero on landing page => only show most recent 5 (or 8) tweets
+    if (!isLoading && !isAuthenticated) {
+        if (allPosts === null || allPosts === undefined) {
+            return;
+        }
+
+        if (allPosts?.length <= 5) {
+            return;
+        }
+
+        // If all checks pass, create a map of the new allPosts with only 8 latest posts
+        const latestPosts = allPosts.slice(0, 8).map(post => {
+            return {
+                ...post
+            };
+        });
+
+        // Replace allPosts with the mapped array of 8 latest posts
+        allPosts = latestPosts;
+    }
+
 
     const handleDelete = (postId: Id<"posts">) => {
         console.log(`handleDelete clicked`);

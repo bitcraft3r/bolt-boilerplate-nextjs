@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "convex/react";
+import { useConvexAuth, useMutation } from "convex/react";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
@@ -14,16 +14,14 @@ const formSchema = z.object({
         .min(1, {
             message: "Message must be at least 1 character.",
         })
-        .max(64, {
-            message: "Message must be at most 64 characters.", // TODO: Increase max character limit?
+        .max(99, {
+            message: "Message must be at most 99 characters.",
         }),
 });
 
-// TODO: If user not authenticated (e.g. when this component used in landing page <Hero />), change Button behavior e.g. Toast with "Log in to continue" , or directly open Login modal.
-// Alternatively, change button color or altogether ; as it may be quite distracting from the main CTA ? E.g. disable form and submit buttons ; grey them out ; add a Hover with instructions.
-// either way -> definitly should not allow Calling the db mutation if on landing page (and landing page only viewable when user not logged in)
-
 const CreatePost = () => {
+    const { isAuthenticated, isLoading } = useConvexAuth();
+
     const createPost = useMutation(api.posts.create);
 
     // 1. Define your form.
@@ -64,9 +62,16 @@ const CreatePost = () => {
                             )}
                         />
                     </div>
-                    <Button className="ml-2 bg-emerald-500 hover:bg-emerald-400" type="submit">
-                        Submit
-                    </Button>
+                    {isAuthenticated
+                        ?
+                        <Button className="ml-2 bg-emerald-500 hover:bg-emerald-400" type="submit">
+                            Submit
+                        </Button>
+                        :
+                        <Button className="ml-2 bg-emerald-500 hover:bg-emerald-400" type="submit" disabled>
+                            Submit
+                        </Button>
+                    }
 
                 </form>
             </Form>
