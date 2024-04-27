@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useConvexAuth } from "convex/react";
-import { SignInButton, UserButton } from "@clerk/nextjs";
-import { CirclePlus, LoaderCircle } from "lucide-react";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { ArrowRight, LoaderCircle, TwitterIcon } from "lucide-react";
 
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { useScrollTop } from "@/hooks/use-scroll-top";
@@ -23,7 +23,7 @@ export const Navbar = () => {
             scrolled && "border-b shadow-sm"
         )}>
             <Logo />
-            <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
+            <div className="md:ml-auto justify-end w-full flex items-center gap-x-2">
                 {isLoading && (
                     <LoaderCircle className="w-4 h-4 animate-spin" />
                 )}
@@ -34,19 +34,21 @@ export const Navbar = () => {
                                 Log in
                             </Button>
                         </SignInButton>
-                        <SignInButton mode="modal">
+                        <SignUpButton mode="modal">
                             <Button size="sm">
-                                Get App free
+                                Get Liit
+                                <ArrowRight className="h-4 w-4 ml-2" />
                             </Button>
-                        </SignInButton>
+                        </SignUpButton>
                     </>
                 )}
                 {isAuthenticated && !isLoading && (
                     <>
-                        <Button variant="secondary" size="sm" asChild>
-                            <Link href="#">
-                                <CirclePlus className="h-4 w-4 mr-2" />
-                                Create
+                        <Button variant="secondary" asChild>
+                            {/* TODO: Link to create a tweet on X with auto-populated text */}
+                            <Link href="/">
+                                <TwitterIcon className="h-5 w-5 mr-2" />
+                                Share on 𝕏
                             </Link>
                         </Button>
                         <UserButton afterSignOutUrl="/" />

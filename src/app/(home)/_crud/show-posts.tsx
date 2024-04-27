@@ -17,6 +17,10 @@ const ShowPosts = () => {
     const deletePost = useMutation(api.posts.del);
     const editPost = useMutation(api.posts.update);
 
+    // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
+
+    // TODO: if user not authenticated / when this component used as Hero on landing page => only show most recent 5 (or 8) tweets
+
     const handleDelete = (postId: Id<"posts">) => {
         console.log(`handleDelete clicked`);
         deletePost({ id: postId });
@@ -29,10 +33,10 @@ const ShowPosts = () => {
     // TODO: for every post, i want to fetch the user's data using the post.authorId. then use the post.author.username post.author.pictureUrl etc to populate the DOM. 
 
     return (
-        <div className="">
+        <div className="text-xs sm:text-sm md:text-base">
             {allPosts?.map((post) => (
-                <div key={post._id} className="border border-t-0 flex p-4 items-center">
-                    <Avatar>
+                <div key={post._id} className="border border-t-0 flex p-2 sm:p-3 md:p-4 items-center">
+                    <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
                         <AvatarImage src={post.pictureUrl} alt="avatar" />
                         <AvatarFallback>JS</AvatarFallback>
                     </Avatar>
@@ -41,12 +45,13 @@ const ShowPosts = () => {
                             <p className="font-bold">{post.name}</p>
                             <p className="text-muted-foreground">@{post.username}</p>
                             <p>·</p>
-                            <p>{dayjs(post._creationTime).fromNow()}</p>
+                            <p className="text-xs">{dayjs(post._creationTime).fromNow()}</p>
                             <div>
                                 {(post.authorId === userId)
                                     ?
                                     <Button variant="ghost" size="sm" className="rounded-full" onClick={() => handleDelete(post._id)}>
-                                        <Trash2 className="w-4 h-4" />
+                                        {/* TODO: Use Dialog (https://ui.shadcn.com/docs/components/dialog) to Confirm delete */}
+                                        <Trash2 className="h-3 w-3 text-muted-foreground" />
                                     </Button>
                                     : <></>
                                 }
@@ -60,15 +65,15 @@ const ShowPosts = () => {
                         {(post.counter > 0)
                             ?
                             <>
-                                <p>{post.counter}</p>
+                                <p className="ml-2">{post.counter}</p>
                                 <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.counter)}>
-                                    <Heart color="red" fill="red" />
+                                    <Heart color="red" fill="red" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
                             :
                             <>
                                 <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.counter)}>
-                                    <Heart />
+                                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
                         }

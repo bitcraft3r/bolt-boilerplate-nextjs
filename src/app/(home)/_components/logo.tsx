@@ -2,6 +2,7 @@
 import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
+import { Flame } from "lucide-react";
 
 const font = Poppins({
     subsets: ["latin"],
@@ -10,7 +11,7 @@ const font = Poppins({
 
 export const Logo = () => {
     return (
-        <div className="hidden md:flex items-center gap-x-2">
+        <div className="flex items-center gap-x-2">
             {/* <Image
                 src="/logo.svg"
                 height="40"
@@ -25,9 +26,10 @@ export const Logo = () => {
                 alt="Logo"
                 className="hidden dark:block"
             /> */}
-            <div className="h-[40px] w-[40px] border-4 rounded-sm" />
-            <p className={cn("font-semibold", font.className)}>
-                Boilerplate
+            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
+            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
+            <p className={cn("font-semibold text-xl", font.className)}>
+                Liit
             </p>
         </div>
     )
