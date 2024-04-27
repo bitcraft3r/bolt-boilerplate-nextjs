@@ -8,7 +8,7 @@ const HomeLayout = ({
     return (
         <div className="h-full">
             <Navbar />
-            <main className="h-full pt-40">
+            <main className="h-full pt-32">
                 {children}
             </main>
         </div>
