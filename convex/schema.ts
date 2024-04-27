@@ -9,6 +9,7 @@ export default defineSchema({
         username: v.string(),
         email: v.string(),
         name: v.optional(v.string()),
+        // totalLiked: v.optional(v.number()), // TODO: Add counter to Users table, increase when user likes any post
         // TODO: Clerk -> Create account with Metamask
         // TODO: Add web3Wallet field (optional)
         // TODO: Figure out Sign Up UX ; many fields required now to sign up ; smallest problem is even on google auth sign up user will need to enter Last name. // Every provider returns different fields in identity -> which should be the identifying field?
@@ -21,4 +22,11 @@ export default defineSchema({
         text: v.string(),
         counter: v.number(),
     }).index("by_author", ["authorId"]),
+    // TODO: Add counters table
+    // counters: defineTable({
+    //     github: v.number(),
+    //     twitter: v.number(),
+    //     share: v.number(),
+    //     totalLikes: v.number(),
+    // }),
 });

@@ -46,6 +46,7 @@ export const Navbar = () => {
                     <>
                         <Button variant="secondary" asChild>
                             {/* TODO: Link to create a tweet on X with auto-populated text */}
+                            {/* TODO: Add counter to record clicks on share button */}
                             <Link href="/">
                                 <TwitterIcon className="h-5 w-5 mr-2" />
                                 Share on 𝕏

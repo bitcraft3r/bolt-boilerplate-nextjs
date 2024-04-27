@@ -81,6 +81,8 @@ const ShowPosts = () => {
                         </div>
                     </div>
                     <div className="flex flex-1 justify-end items-center">
+                        {/* TODO: Add counter to record totalLikes */}
+                        {/* TODO: Add counter to Users table, increase when user likes any post */}
                         {(post.counter > 0)
                             ?
                             <>
