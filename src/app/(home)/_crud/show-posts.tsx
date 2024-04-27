@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { DialogDelete } from "./_components/dialog-delete";
 
 dayjs.extend(relativeTime);
 
@@ -16,7 +17,6 @@ const ShowPosts = () => {
 
     const userId = useStoreUserEffect();
     let allPosts = useQuery(api.posts.read);
-    const deletePost = useMutation(api.posts.del);
     const editPost = useMutation(api.posts.update);
 
     // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
@@ -39,12 +39,6 @@ const ShowPosts = () => {
 
         // Replace allPosts with the mapped array of 8 latest posts
         allPosts = latestPosts;
-    }
-
-
-    const handleDelete = (postId: Id<"posts">) => {
-        console.log(`handleDelete clicked`);
-        deletePost({ id: postId });
     }
 
     const handleEdit = (postId: Id<"posts">, counter: number) => {
@@ -73,10 +67,11 @@ const ShowPosts = () => {
                             <div>
                                 {(post.authorId === userId)
                                     ?
-                                    <Button variant="ghost" size="sm" className="rounded-full" onClick={() => handleDelete(post._id)}>
-                                        {/* TODO: Use Dialog (https://ui.shadcn.com/docs/components/dialog) to Confirm delete */}
-                                        <Trash2 className="h-3 w-3 text-muted-foreground" />
-                                    </Button>
+                                    <DialogDelete postId={post._id}>
+                                        <Button variant="ghost" size="sm" className="rounded-full">
+                                            <Trash2 className="h-3 w-3 text-muted-foreground" />
+                                        </Button>
+                                    </DialogDelete>
                                     : <></>
                                 }
                             </div>
