@@ -22,8 +22,8 @@ export const initialize = mutation({
     handler: async (ctx) => {
 
         const tableRows = [
-            "twitter",
-            "telegram",
+            // "twitter",
+            // "telegram",
             // "discord",
             "github",
             "shareButton",

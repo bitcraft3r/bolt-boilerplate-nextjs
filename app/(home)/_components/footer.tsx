@@ -7,10 +7,10 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 const buttonData = [
-    { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },
-    { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
+    // { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },
+    // { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
     // { name: "discord", icon: <BotMessageSquareIcon />, link: "https://discord.com/" },
-    { name: "github", icon: <GithubIcon />, link: "https://github.com/" }
+    { name: "github", icon: <GithubIcon />, link: "https://github.com/sov3333/get-liit/" }
 ];
 
 export const Footer = () => {
