@@ -23,6 +23,8 @@ export const store = mutation({
             throw new Error("Called storeUser without authentication present");
         }
 
+        // console.log(`identity`, identity);
+
         // Check if we've already stored this identity before.
         const user = await ctx.db
             .query("users")
@@ -31,22 +33,16 @@ export const store = mutation({
             )
             .unique();
         if (user !== null) {
-            // If we've seen this identity before but the name has changed, patch the value.
+            // If we've seen this identity before but the imageUrl, email, or username has changed, patch the value.
             if (
-                user.tokenIdentifier !== identity.tokenIdentifier ||
-                user.clerkUserId !== identity.subject ||
-                user.pictureUrl !== identity.pictureUrl ||
-                user.username !== identity.nickname ||
+                user.imageUrl !== identity.pictureUrl ||
                 user.email !== identity.email ||
-                user.name !== identity.name
+                user.username !== identity.nickname
             ) {
                 await ctx.db.patch(user._id, {
-                    tokenIdentifier: identity.tokenIdentifier,
-                    clerkUserId: identity.subject,
-                    pictureUrl: identity.pictureUrl,
-                    username: identity.nickname,
+                    imageUrl: identity.pictureUrl,
                     email: identity.email,
-                    name: identity.name,
+                    username: identity.nickname,
                 });
             }
             return user._id;
@@ -55,10 +51,9 @@ export const store = mutation({
         return await ctx.db.insert("users", {
             tokenIdentifier: identity.tokenIdentifier,
             clerkUserId: identity.subject,
-            pictureUrl: identity.pictureUrl!,
-            username: identity.nickname!,
+            imageUrl: identity.pictureUrl!,
             email: identity.email!,
-            name: identity.name,
+            username: identity.nickname!,
         });
     },
 });

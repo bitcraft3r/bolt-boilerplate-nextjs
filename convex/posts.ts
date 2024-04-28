@@ -20,7 +20,7 @@ export const create = mutation({
             throw new Error("User not found");
         }
 
-        if (text.length <= 0 || text.length > 99) {
+        if (text.length <= 0 || text.length > 100) {
             throw new Error("Message is empty or too long");
         }
 
@@ -28,11 +28,11 @@ export const create = mutation({
             .insert("posts", {
                 authorId: author._id,
                 text,
-                counter: 0,
+                likes: 0,
                 // TODO: instead of adding the pictureUrl, username, and name of the author at time of creating post, is it possible to get all author data just with the authorId (so we dont have to save the user's data to every post)?
-                pictureUrl: author.pictureUrl,
+                imageUrl: author.imageUrl,
                 username: author.username,
-                name: author.name!,
+                // name: author.givenName,
             });
 
         return newPostId;
@@ -52,11 +52,11 @@ export const read = query({
 });
 
 export const update = mutation({
-    args: { id: v.id("posts"), counter: v.number() },
+    args: { id: v.id("posts"), likes: v.number() },
     handler: async (ctx, args) => {
-        const { id, counter } = args;
+        const { id, likes } = args;
 
-        const updatedPost = await ctx.db.patch(id, { counter: counter + 1 });
+        const updatedPost = await ctx.db.patch(id, { likes: likes + 1 });
 
         return updatedPost;
     },

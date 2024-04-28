@@ -1,4 +1,5 @@
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
+import { useUser } from "@clerk/nextjs";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Heart, Trash2 } from "lucide-react";
@@ -14,6 +15,8 @@ dayjs.extend(relativeTime);
 
 const ShowPosts = () => {
     const { isAuthenticated, isLoading } = useConvexAuth();
+    const { user } = useUser();
+    // console.log(`clerk user data`, user);
 
     const userId = useStoreUserEffect();
     let allPosts = useQuery(api.posts.read);
@@ -23,26 +26,23 @@ const ShowPosts = () => {
 
     if (!isLoading && !isAuthenticated) {
         if (allPosts === null || allPosts === undefined) {
-            return;
+            return (<></>);
+            // alternatively, show mock data
         }
 
-        if (allPosts?.length <= 5) {
-            return;
+        let postsToDisplay = 5;
+
+        // If too many posts found, return truncated version of allPosts
+        if (allPosts?.length > postsToDisplay) {
+            const latestPosts = allPosts.slice(0, postsToDisplay).map(post => {
+                return { ...post };
+            });
+            allPosts = latestPosts;
         }
-
-        // If all checks pass, create a map of the new allPosts with only 8 latest posts
-        const latestPosts = allPosts.slice(0, 8).map(post => {
-            return {
-                ...post
-            };
-        });
-
-        // Replace allPosts with the mapped array of 8 latest posts
-        allPosts = latestPosts;
     }
 
-    const handleEdit = (postId: Id<"posts">, counter: number) => {
-        editPost({ id: postId, counter });
+    const handleEdit = (postId: Id<"posts">, likes: number) => {
+        editPost({ id: postId, likes });
     }
 
     // TODO: for every post, i want to fetch the user's data using the post.authorId. then use the post.author.username post.author.pictureUrl etc to populate the DOM. 
@@ -52,13 +52,11 @@ const ShowPosts = () => {
             {allPosts?.map((post) => (
                 <div key={post._id} className="border border-t-0 flex p-2 sm:p-3 md:p-4 items-center">
                     <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
-                        <AvatarImage src={post.pictureUrl} alt="avatar" />
-                        <AvatarFallback>JS</AvatarFallback>
+                        <AvatarImage src={post.imageUrl} alt="avatar" />
+                        <AvatarFallback>Liit</AvatarFallback>
                     </Avatar>
                     <div className="ml-4 flex flex-col justify-center items-start">
                         <div className="flex gap-x-1 justify-center items-center">
-                            {/* TODO: Truncate name to ~10 characters */}
-                            <p className="font-bold">{post.name}</p>
                             {/* TODO: set max characters for username? */}
                             <p className="text-muted-foreground">@{post.username}</p>
                             <p>·</p>
@@ -83,17 +81,17 @@ const ShowPosts = () => {
                     <div className="flex flex-1 justify-end items-center">
                         {/* TODO: Add counter to record totalLikes */}
                         {/* TODO: Add counter to Users table, increase when user likes any post */}
-                        {(post.counter > 0)
+                        {(post.likes > 0)
                             ?
                             <>
-                                <p className="ml-2">{post.counter}</p>
-                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.counter)}>
+                                <p className="ml-2">{post.likes}</p>
+                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.likes)}>
                                     <Heart color="red" fill="red" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
                             :
                             <>
-                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.counter)}>
+                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.likes)}>
                                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
