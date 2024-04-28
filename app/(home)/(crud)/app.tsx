@@ -1,4 +1,4 @@
-import CreatePost from "./create-post"
+import CreatePost from "./_components/create-post"
 import { AllPosts } from "./_components/all-posts"
 
 export const App = () => {

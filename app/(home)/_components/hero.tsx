@@ -1,5 +1,5 @@
 import { AllPosts } from "../(crud)/_components/all-posts"
-import CreatePost from "../(crud)/create-post"
+import CreatePost from "../(crud)/_components/create-post"
 
 export const Hero = () => {
     return (
