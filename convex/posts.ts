@@ -26,6 +26,12 @@ export const create = mutation({
             throw new Error("Message is empty or too long");
         }
 
+        if (author.numPosts === undefined) {
+            await ctx.db.patch(author._id, { numPosts: 1 });
+        } else {
+            await ctx.db.patch(author._id, { numPosts: author.numPosts! + 1 });
+        }
+
         const newPostId = await ctx.db
             .insert("posts", {
                 authorId: author._id,
@@ -68,6 +74,28 @@ export const like = mutation({
     handler: async (ctx, { postId }) => {
         const post = await ctx.db.get(postId);
         const updatedPost = await ctx.db.patch(postId, { likes: post?.likes! + 1 });
+
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity) {
+            const author = await ctx.db
+                .query("users")
+                .withIndex("by_token", (q) =>
+                    q.eq("tokenIdentifier", identity.tokenIdentifier),
+                )
+                .unique();
+
+            if (author === null) {
+                throw new Error("User not found");
+            }
+
+            if (author.totalLiked === undefined) {
+                await ctx.db.patch(author._id, { totalLiked: 1 });
+            } else {
+                await ctx.db.patch(author._id, { totalLiked: author.totalLiked! + 1 });
+            }
+        }
+
         return updatedPost;
     },
 });

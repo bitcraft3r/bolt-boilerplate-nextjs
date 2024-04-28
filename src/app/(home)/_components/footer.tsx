@@ -3,15 +3,20 @@ import { BotMessageSquareIcon, GithubIcon, SendIcon, TwitterIcon } from "lucide-
 
 import { Button } from "@/components/ui/button"
 import { Logo } from "./logo"
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
 
 const buttonData = [
-    { icon: <TwitterIcon />, link: "https://twitter.com/" },
-    { icon: <SendIcon />, link: "https://t.me/" },
-    { icon: <BotMessageSquareIcon />, link: "https://discord.com/" },
-    { icon: <GithubIcon />, link: "https://github.com/" }
+    { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },
+    { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
+    { name: "discord", icon: <BotMessageSquareIcon />, link: "https://discord.com/" },
+    { name: "github", icon: <GithubIcon />, link: "https://github.com/" }
 ];
 
 export const Footer = () => {
+
+    const incrementCounter = useMutation(api.counters.increment);
+
     return (
         <div className="flex items-center w-full p-6 bg-background z-50">
             <Logo />
@@ -22,7 +27,7 @@ export const Footer = () => {
                         variant="ghost"
                         size="sm"
                         asChild
-                        onClick={() => { /* Handle button click */ }}
+                        onClick={() => incrementCounter({ name: button.name })}
                     >
                         <Link href={button.link} target="_blank" rel="noopener noreferrer">
                             {button.icon}

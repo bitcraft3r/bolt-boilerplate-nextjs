@@ -21,6 +21,7 @@ const ShowPosts = () => {
     // @ts-ignore
     let allPosts: Post[] = useQuery(api.posts.all);
     const likePost = useMutation(api.posts.like);
+    const incrementCounter = useMutation(api.counters.increment);
 
     // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
 
@@ -41,6 +42,7 @@ const ShowPosts = () => {
 
     const handleLike = (postId: Id<"posts">, likes: number) => {
         likePost({ postId });
+        incrementCounter({ name: "totalLikes" });
     }
 
     return (
@@ -76,8 +78,6 @@ const ShowPosts = () => {
                         </div>
                     </div>
                     <div className="flex flex-1 justify-end items-center">
-                        {/* TODO: Add counter to record totalLikes */}
-                        {/* TODO: Add counter to Users table, increase when user likes any post */}
                         {(post.likes > 0)
                             ?
                             <>

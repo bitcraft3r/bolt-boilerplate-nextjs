@@ -8,6 +8,8 @@ export default defineSchema({
         imageUrl: v.string(),
         email: v.string(), // set as required for use as primary contact information
         username: v.string(), // set as required for use as unique identifier in app
+        numPosts: v.optional(v.number()),
+        totalLiked: v.optional(v.number()),
 
         /** NOTES: 
          * Clerk auth login provides following user data `identity` via ctx.auth.getUserIdentity(), used in convex folder:
@@ -31,20 +33,14 @@ export default defineSchema({
          * 
          */
 
-        // TODO: Add numPosts counter to user table
-        // totalLiked: v.optional(v.number()), // TODO: Add like counter to Users table, increase when user likes any post
-
     }).index("by_token", ["tokenIdentifier"]),
     posts: defineTable({
         authorId: v.id("users"),
         text: v.string(),
         likes: v.number(),
     }).index("by_author", ["authorId"]),
-    // TODO: Add counters table
-    // counters: defineTable({
-    //     github: v.number(),
-    //     twitter: v.number(),
-    //     share: v.number(),
-    //     totalLikes: v.number(),
-    // }),
+    counters: defineTable({
+        name: v.string(),
+        count: v.number(),
+    }).index("by_name", ["name"]),
 });
