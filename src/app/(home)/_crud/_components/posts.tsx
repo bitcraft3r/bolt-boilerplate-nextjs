@@ -1,42 +1,35 @@
-import { useConvexAuth, useMutation, useQuery } from "convex/react";
-import { useUser } from "@clerk/nextjs";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { useUser } from "@clerk/nextjs";
+import { useConvexAuth, useMutation } from "convex/react";
 import { Heart, Trash2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { api } from "../../../../convex/_generated/api";
-import { Id } from "../../../../convex/_generated/dataModel";
-import { DialogDelete } from "./_components/dialog-delete";
-import { Post } from "../../../../convex/posts";
+import { DialogDelete } from "./dialog-delete";
+import { api } from "../../../../../convex/_generated/api";
+import { Id } from "../../../../../convex/_generated/dataModel";
+import { Post } from "../../../../../convex/posts";
 
 dayjs.extend(relativeTime);
 
-const ShowPosts = () => {
+export function Posts(props: { posts: Post[] }) {
+
     const { isAuthenticated, isLoading } = useConvexAuth();
     const { user } = useUser();
     // console.log(`clerk user data`, user); // user.id here is the clerkUserId
 
-    // @ts-ignore
-    let allPosts: Post[] = useQuery(api.posts.all);
     const likePost = useMutation(api.posts.like);
     const incrementCounter = useMutation(api.counters.increment);
 
-    // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
+    let posts = props.posts;
 
-    if (!isLoading && !isAuthenticated) {
-        if (allPosts === null || allPosts === undefined) {
-            return (<></>);
-            // alternatively, show mock data
-        }
-
+    if (!isAuthenticated && !isLoading) {
         let postsToDisplay = 5;
 
         // If too many posts found, return truncated version of allPosts
-        if (allPosts?.length > postsToDisplay) {
-            const latestPosts = allPosts.slice(0, postsToDisplay);
-            allPosts = latestPosts;
+        if (props.posts.length > postsToDisplay) {
+            posts = props.posts.slice(0, postsToDisplay);
         }
     }
 
@@ -47,7 +40,7 @@ const ShowPosts = () => {
 
     return (
         <div className="text-xs sm:text-sm md:text-base">
-            {allPosts?.map((post) => (
+            {posts.map((post) => (
                 <div key={post._id} className="border border-t-0 flex p-2 sm:p-3 md:p-4 items-center">
                     <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
                         <AvatarImage src={post.author.imageUrl} alt="avatar" />
@@ -59,7 +52,6 @@ const ShowPosts = () => {
                             <p>·</p>
                             <p className="text-xs">{dayjs(post._creationTime).fromNow(true)}</p>
                             <div>
-                                {/* {(post.authorId === userId) */}
                                 {(post?.author.clerkUserId === user?.id)
                                     ?
                                     <DialogDelete postId={post._id}>
@@ -98,5 +90,3 @@ const ShowPosts = () => {
         </div>
     );
 }
-
-export default ShowPosts;

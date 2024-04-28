@@ -1,5 +1,7 @@
 import { asyncMap } from "modern-async";
 import { v } from "convex/values";
+import { paginationOptsValidator } from "convex/server";
+
 import { QueryCtx, mutation, query } from "./_generated/server";
 import { Doc } from "./_generated/dataModel";
 
@@ -44,14 +46,14 @@ export const create = mutation({
 });
 
 export const all = query({
-    args: {},
+    args: { paginationOpts: paginationOptsValidator },
     handler: async (ctx, args) => {
         const allPosts = await ctx.db
             .query("posts")
             .order("desc")
-            .collect();
+            .paginate(args.paginationOpts);
 
-        return await enrichPosts(ctx, allPosts);
+        return { ...allPosts, page: await enrichPosts(ctx, allPosts.page) };
     },
 });
 
