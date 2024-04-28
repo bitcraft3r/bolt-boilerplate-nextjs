@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useConvexAuth } from "convex/react";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { ArrowRight, LoaderCircle, TwitterIcon } from "lucide-react";
+import { ArrowRight, LoaderCircle } from "lucide-react";
 
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { useScrollTop } from "@/hooks/use-scroll-top";

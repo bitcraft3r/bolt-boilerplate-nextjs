@@ -1,7 +1,5 @@
 import { mutation } from "./_generated/server";
 
-// TODO: Figure out how to setup http Websocket connection to Clerk to listen to events when Clerk user is updated , so we can update in our DB too.
-
 /**
  * Insert or update the user in a Convex table then return the document's ID.
  *

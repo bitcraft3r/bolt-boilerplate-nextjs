@@ -55,10 +55,8 @@ const ShowPosts = () => {
                     </Avatar>
                     <div className="ml-4 flex flex-col justify-center items-start">
                         <div className="flex gap-x-1 justify-center items-center">
-                            {/* TODO: set max characters for username? */}
                             <p className="text-muted-foreground">@{post?.author.username}</p>
                             <p>·</p>
-                            {/* TODO: Customize Day.js using UpdateLocale plugin for even shorter version, e.g. say "5s instead of 5 seconds, 12m instead of 12 minutes, 4h not 4 hours, etc." */}
                             <p className="text-xs">{dayjs(post._creationTime).fromNow(true)}</p>
                             <div>
                                 {/* {(post.authorId === userId) */}

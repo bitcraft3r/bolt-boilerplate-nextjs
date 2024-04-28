@@ -23,7 +23,6 @@ export function DialogDelete({
     const deletePost = useMutation(api.posts.del);
 
     const handleDelete = (postId: Id<"posts">) => {
-        console.log(`handleDelete clicked`);
         deletePost({ postId });
     }
 
