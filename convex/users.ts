@@ -14,8 +14,8 @@ import { QueryCtx, mutation, query } from "./_generated/server";
  * by the JWT token's Claims config.
  */
 export const store = mutation({
-    args: {},
-    handler: async (ctx) => {
+    args: { wallet: v.string() },
+    handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
 
         if (!identity) {
@@ -36,12 +36,14 @@ export const store = mutation({
             if (
                 user.imageUrl !== identity.pictureUrl ||
                 user.email !== identity.email ||
-                user.username !== identity.nickname
+                user.username !== identity.nickname ||
+                user.wallet !== args.wallet
             ) {
                 await ctx.db.patch(user._id, {
                     imageUrl: identity.pictureUrl,
                     email: identity.email,
                     username: identity.nickname,
+                    wallet: args.wallet,
                 });
             }
             return user._id;
@@ -53,6 +55,7 @@ export const store = mutation({
             imageUrl: identity.pictureUrl!,
             email: identity.email!,
             username: identity.nickname!,
+            wallet: args.wallet || "",
         });
     },
 });

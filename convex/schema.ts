@@ -8,6 +8,7 @@ export default defineSchema({
         imageUrl: v.string(),
         email: v.string(), // set as required for use as primary contact information
         username: v.string(), // set as required for use as unique identifier in app
+        wallet: v.optional(v.string()), // web3 wallet address
         numPosts: v.optional(v.number()),
         totalLiked: v.optional(v.number()),
         clickedShare: v.optional(v.number()),
