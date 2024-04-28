@@ -4,6 +4,7 @@ import { paginationOptsValidator } from "convex/server";
 
 import { QueryCtx, mutation, query } from "./_generated/server";
 import { Doc } from "./_generated/dataModel";
+import { getUser } from "./users";
 
 export const create = mutation({
     args: { text: v.string() },
@@ -54,6 +55,37 @@ export const all = query({
             .paginate(args.paginationOpts);
 
         return { ...allPosts, page: await enrichPosts(ctx, allPosts.page) };
+    },
+});
+
+export const get = query({
+    args: { postId: v.id("posts") },
+    handler: async (ctx, args) => {
+        const post = await ctx.db.get(args.postId);
+        if (post === null) {
+            return null;
+        }
+        return await enrichPost(ctx, post);
+    },
+});
+
+export const forAuthor = query({
+    args: {
+        authorUserName: v.string(),
+        paginationOpts: paginationOptsValidator,
+    },
+    handler: async (ctx, args) => {
+        const author = await getUser(ctx, args.authorUserName);
+        if (author === null) {
+            return { page: [], isDone: true, continueCursor: "" };
+        }
+        const result = await ctx.db
+            .query("posts")
+            .withIndex("by_author", (q) => q.eq("authorId", author._id))
+            .order("desc")
+            .paginate(args.paginationOpts);
+
+        return { ...result, page: await enrichPosts(ctx, result.page) };
     },
 });
 

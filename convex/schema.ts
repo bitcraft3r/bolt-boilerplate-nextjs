@@ -33,7 +33,9 @@ export default defineSchema({
          * 
          */
 
-    }).index("by_token", ["tokenIdentifier"]),
+    })
+        .index("by_token", ["tokenIdentifier"])
+        .index("username", ["username"]),
     posts: defineTable({
         authorId: v.id("users"),
         text: v.string(),

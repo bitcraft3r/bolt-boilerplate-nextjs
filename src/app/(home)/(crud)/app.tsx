@@ -1,5 +1,5 @@
 import CreatePost from "./create-post"
-import { AllPosts } from "../_crud/_components/all-posts"
+import { AllPosts } from "./_components/all-posts"
 
 export const App = () => {
     return (

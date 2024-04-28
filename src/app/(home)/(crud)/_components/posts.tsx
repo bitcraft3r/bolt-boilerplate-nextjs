@@ -10,6 +10,7 @@ import { DialogDelete } from "./dialog-delete";
 import { api } from "../../../../../convex/_generated/api";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { Post } from "../../../../../convex/posts";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 
@@ -48,9 +49,13 @@ export function Posts(props: { posts: Post[] }) {
                     </Avatar>
                     <div className="ml-4 flex flex-col justify-center items-start">
                         <div className="flex gap-x-1 justify-center items-center">
-                            <p className="text-muted-foreground">@{post?.author.username}</p>
+                            <Link href={`/${post.author.username}`}>
+                                <p className="text-muted-foreground">@{post?.author.username}</p>
+                            </Link>
                             <p>·</p>
-                            <p className="text-xs">{dayjs(post._creationTime).fromNow(true)}</p>
+                            <Link href={`/post/${post._id}`}>
+                                <p className="text-xs">{dayjs(post._creationTime).fromNow(true)}</p>
+                            </Link>
                             <div>
                                 {(post?.author.clerkUserId === user?.id)
                                     ?
