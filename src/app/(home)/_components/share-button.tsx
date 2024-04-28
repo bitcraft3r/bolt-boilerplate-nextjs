@@ -8,7 +8,7 @@ import { api } from "../../../../convex/_generated/api";
 const ShareButton = () => {
     const incrementCounter = useMutation(api.counters.increment);
 
-    const tweetText = encodeURIComponent(`Join me on Liit, the microblogging platform that's changing the game. Unlimited likes and seamless interactions, powered by @convex_dev's real-time magic. 🔥 #Liit @nextjs \n\nhttps://getliit.vercel.app/`);
+    const tweetText = encodeURIComponent(`Join me on @Get_Liit, the microblogging platform that's changing the game. Unlimited likes and seamless interactions, powered by #Convex's real-time magic. 🔥 #Liit #NextJS \n\nhttps://getliit.vercel.app/`);
 
     return (
         <>

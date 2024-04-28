@@ -24,7 +24,7 @@ export const initialize = mutation({
         const tableRows = [
             "twitter",
             "telegram",
-            "discord",
+            // "discord",
             "github",
             "shareButton",
             "totalLikes"

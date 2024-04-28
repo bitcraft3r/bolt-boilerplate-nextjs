@@ -10,6 +10,21 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Convex CRUD Boilerplate",
   description: "Next.js Boilerplate with Convex and Clerk",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/logo.png",
+        href: "/logo.png",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo-dark.png",
+        href: "/logo-dark.png",
+      }
+    ]
+  },
 };
 
 export default function RootLayout({
