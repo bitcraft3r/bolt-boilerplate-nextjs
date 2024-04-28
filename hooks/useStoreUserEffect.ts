@@ -24,7 +24,7 @@ export default function useStoreUserEffect() {
         // Recall that `storeUser` gets the user information via the `auth`
         // object on the server. You don't need to pass anything manually here.
         async function createUser() {
-            const id = await storeUser();
+            const id = await storeUser({ wallet: user?.primaryWeb3Wallet?.web3Wallet || "" });
             setUserId(id);
         }
         createUser();
