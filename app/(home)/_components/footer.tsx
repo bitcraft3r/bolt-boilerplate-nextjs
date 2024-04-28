@@ -4,7 +4,7 @@ import { BotMessageSquareIcon, GithubIcon, SendIcon, TwitterIcon } from "lucide-
 import { Button } from "@/components/ui/button"
 import { Logo } from "./logo"
 import { useMutation } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 
 const buttonData = [
     { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },

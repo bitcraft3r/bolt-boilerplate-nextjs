@@ -7,9 +7,9 @@ import { Heart, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DialogDelete } from "./dialog-delete";
-import { api } from "../../../../../convex/_generated/api";
-import { Id } from "../../../../../convex/_generated/dataModel";
-import { Post } from "../../../../../convex/posts";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { Post } from "@/convex/posts";
 import Link from "next/link";
 
 dayjs.extend(relativeTime);

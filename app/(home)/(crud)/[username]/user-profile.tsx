@@ -13,7 +13,7 @@ import {
 import { useQuery } from "convex/react";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { api } from "../../../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 
 export function UserProfile({ username }: { username: string }) {
     const user = useQuery(api.users.get, { username });

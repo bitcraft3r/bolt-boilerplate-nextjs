@@ -3,8 +3,8 @@
 import { ConvexHttpClient } from "convex/browser";
 
 import { Posts } from "../../_components/posts";
-import { api } from "../../../../../../convex/_generated/api";
-import { Id } from "../../../../../../convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { BackLink } from "../../_components/backlink";
 import { useQuery } from "convex/react";
 

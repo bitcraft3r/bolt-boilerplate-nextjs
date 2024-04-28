@@ -3,7 +3,7 @@ import { useMutation } from "convex/react";
 import { TwitterIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 
 const ShareButton = () => {
     const incrementCounter = useMutation(api.counters.increment);
