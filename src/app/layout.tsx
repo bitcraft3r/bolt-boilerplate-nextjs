@@ -8,8 +8,8 @@ import { ConvexClientProvider } from "@/components/convex-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Convex CRUD Boilerplate",
-  description: "Next.js Boilerplate with Convex and Clerk",
+  title: "Liit: Microblogging Platform with Unlimited Likes | NextJS & Convex Boilerplate",
+  description: "Built with NextJS and powered by Convex's real-time database, Liit offers developers a robust boilerplate for building engaging web experiences.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
   icons: {
     icon: [
