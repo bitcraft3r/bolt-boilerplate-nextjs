@@ -10,6 +10,8 @@ export default defineSchema({
         username: v.string(), // set as required for use as unique identifier in app
         numPosts: v.optional(v.number()),
         totalLiked: v.optional(v.number()),
+        clickedShare: v.optional(v.number()),
+        clickedGithub: v.optional(v.number()),
 
         /** NOTES: 
          * Clerk auth login provides following user data `identity` via ctx.auth.getUserIdentity(), used in convex folder:

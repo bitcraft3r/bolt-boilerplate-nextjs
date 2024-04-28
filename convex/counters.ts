@@ -12,8 +12,42 @@ export const increment = mutation({
             )
             .first();
 
+        if (!counter) {
+            throw new Error("Counter not found");
+        }
+
         const increment = await ctx.db.patch(counter?._id!, { count: counter?.count! + 1 })
 
+        // Increment user-specific counters if user is authenticated
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity) {
+            const user = await ctx.db
+                .query("users")
+                .withIndex("by_token", (q) =>
+                    q.eq("tokenIdentifier", identity.tokenIdentifier),
+                )
+                .unique();
+
+            if (!user) {
+                throw new Error("User not found");
+            }
+
+            let updateField;
+            if (args.name === 'github') {
+                updateField = 'clickedGithub';
+            } else if (args.name === 'shareButton') {
+                updateField = 'clickedShare';
+            }
+
+            if (updateField) {
+                // @ts-ignore
+                const newValue = (user[updateField] ?? 0) + 1;
+                await ctx.db.patch(user._id, { [updateField]: newValue });
+            }
+        }
+
+        return increment;
     }
 })
 
