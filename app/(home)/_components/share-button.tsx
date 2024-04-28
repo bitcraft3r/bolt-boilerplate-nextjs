@@ -12,15 +12,16 @@ const ShareButton = () => {
 
     return (
         <>
-            <Button variant="secondary" asChild onClick={() => incrementCounter({ name: "shareButton" })}>
+            <Button variant="ghost" asChild onClick={() => incrementCounter({ name: "shareButton" })}>
                 <Link
                     className="twitter-share-button"
                     data-size="large"
                     href={`https://twitter.com/intent/tweet?text=${tweetText}`}
                     target="_blank" rel="noopener noreferrer"
                 >
-                    <TwitterIcon className="h-5 w-5 mr-2" />
-                    Share on 𝕏
+                    <TwitterIcon />
+                    {/* <TwitterIcon className="h-5 w-5 mr-2" /> */}
+                    {/* Share on 𝕏 */}
                 </Link>
             </Button>
         </>

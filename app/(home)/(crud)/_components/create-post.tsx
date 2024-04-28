@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Flame } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 const formSchema = z.object({
     text: z.string()
@@ -48,14 +49,27 @@ const CreatePost = () => {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
                     <div className="flex items-center">
-                        <Avatar className="mr-2 h-8 w-8">
-                            <AvatarImage src={user?.imageUrl} alt="avatar" />
-                            <AvatarFallback>
-                                <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
-                                <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
-                            </AvatarFallback>
-                        </Avatar>
-                        {/* <SquarePen className="text-muted-foreground mr-2 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" /> */}
+                        {
+                            isAuthenticated
+                                ?
+                                <Link href={`/${user?.username}`}>
+                                    <Avatar className="mr-2 h-8 w-8">
+                                        <AvatarImage src={user?.imageUrl} alt="avatar" />
+                                        <AvatarFallback>
+                                            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
+                                            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </Link>
+                                :
+                                <Avatar className="mr-2 h-8 w-8">
+                                    {/* <AvatarImage src={user?.imageUrl} alt="avatar" /> */}
+                                    <AvatarFallback>
+                                        <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
+                                        <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
+                                    </AvatarFallback>
+                                </Avatar>
+                        }
                     </div>
                     <div className="flex-1">
                         <FormField

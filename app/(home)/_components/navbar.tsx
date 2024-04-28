@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
-import ShareButton from "./share-button";
 
 export const Navbar = () => {
     const userId = useStoreUserEffect();
@@ -36,7 +35,7 @@ export const Navbar = () => {
                         </SignInButton>
                         <SignUpButton mode="modal">
                             <Button size="sm">
-                                Get Liit
+                                Get Liit free
                                 <ArrowRight className="h-4 w-4 ml-2" />
                             </Button>
                         </SignUpButton>
@@ -44,7 +43,6 @@ export const Navbar = () => {
                 )}
                 {isAuthenticated && !isLoading && (
                     <>
-                        <ShareButton />
                         <UserButton afterSignOutUrl="/" />
                     </>
                 )}

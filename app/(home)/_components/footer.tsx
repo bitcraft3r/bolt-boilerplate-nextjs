@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Logo } from "./logo"
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import ShareButton from "./share-button";
 
 const buttonData = [
     // { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },
@@ -34,6 +35,7 @@ export const Footer = () => {
                         </Link>
                     </Button>
                 ))}
+                <ShareButton />
             </div>
         </div>
     )

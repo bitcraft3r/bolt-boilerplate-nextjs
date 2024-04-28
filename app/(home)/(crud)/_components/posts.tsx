@@ -43,10 +43,12 @@ export function Posts(props: { posts: Post[] }) {
         <div className="text-xs sm:text-sm md:text-base">
             {posts.map((post) => (
                 <div key={post._id} className="border border-t-0 flex p-2 sm:p-3 md:p-4 items-center">
-                    <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
-                        <AvatarImage src={post.author.imageUrl} alt="avatar" />
-                        <AvatarFallback>Liit</AvatarFallback>
-                    </Avatar>
+                    <Link href={`/${post.author.username}`}>
+                        <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
+                            <AvatarImage src={post.author.imageUrl} alt="avatar" />
+                            <AvatarFallback>Liit</AvatarFallback>
+                        </Avatar>
+                    </Link>
                     <div className="ml-4 flex flex-col justify-center items-start">
                         <div className="flex gap-x-1 justify-center items-center">
                             <Link href={`/${post.author.username}`}>

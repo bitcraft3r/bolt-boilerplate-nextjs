@@ -4,7 +4,7 @@ Liit is a powerful microblogging CRUD (Create, Read, Update, Delete) application
 
 ## Features
 
-- Unlimited Likes: Users can like posts multiple times, without limitations.
+- Unlimited Likes: Anyone can like posts multiple times, without limitations.
 - Real-Time Updates: Leveraging Convex's real-time database, users experience seamless interactions with instant updates.
 - Authentication: Integrated with Clerk for secure authentication and user management.
 - Custom Styling: Styled with Shadcn to provide a visually appealing and customizable user interface.
