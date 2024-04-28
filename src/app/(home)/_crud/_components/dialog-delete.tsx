@@ -24,7 +24,7 @@ export function DialogDelete({
 
     const handleDelete = (postId: Id<"posts">) => {
         console.log(`handleDelete clicked`);
-        deletePost({ id: postId });
+        deletePost({ postId });
     }
 
     return (

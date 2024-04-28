@@ -1,5 +1,7 @@
+import { asyncMap } from "modern-async";
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { QueryCtx, mutation, query } from "./_generated/server";
+import { Doc } from "./_generated/dataModel";
 
 export const create = mutation({
     args: { text: v.string() },
@@ -29,17 +31,13 @@ export const create = mutation({
                 authorId: author._id,
                 text,
                 likes: 0,
-                // TODO: instead of adding the pictureUrl, username, and name of the author at time of creating post, is it possible to get all author data just with the authorId (so we dont have to save the user's data to every post)?
-                imageUrl: author.imageUrl,
-                username: author.username,
-                // name: author.givenName,
             });
 
         return newPostId;
     },
 });
 
-export const read = query({
+export const all = query({
     args: {},
     handler: async (ctx, args) => {
         const allPosts = await ctx.db
@@ -47,24 +45,36 @@ export const read = query({
             .order("desc")
             .collect();
 
-        return allPosts;
+        return await enrichPosts(ctx, allPosts);
     },
 });
 
-export const update = mutation({
-    args: { id: v.id("posts"), likes: v.number() },
-    handler: async (ctx, args) => {
-        const { id, likes } = args;
+async function enrichPosts(ctx: QueryCtx, posts: Doc<"posts">[]) {
+    return await asyncMap(posts, (post) => enrichPost(ctx, post));
+}
 
-        const updatedPost = await ctx.db.patch(id, { likes: likes + 1 });
+async function enrichPost(ctx: QueryCtx, post: Doc<"posts">) {
+    const author = await ctx.db.get(post.authorId);
+    if (author === null) {
+        return null;
+    }
+    return { ...post, author };
+}
 
+export type Post = NonNullable<Awaited<ReturnType<typeof enrichPost>>>;
+
+export const like = mutation({
+    args: { postId: v.id("posts") },
+    handler: async (ctx, { postId }) => {
+        const post = await ctx.db.get(postId);
+        const updatedPost = await ctx.db.patch(postId, { likes: post?.likes! + 1 });
         return updatedPost;
     },
 });
 
 export const del = mutation({
-    args: { id: v.id("posts") },
-    handler: async (ctx, { id }) => {
-        await ctx.db.delete(id);
+    args: { postId: v.id("posts") },
+    handler: async (ctx, { postId }) => {
+        await ctx.db.delete(postId);
     },
 });

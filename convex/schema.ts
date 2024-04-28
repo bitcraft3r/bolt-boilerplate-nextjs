@@ -39,9 +39,6 @@ export default defineSchema({
         authorId: v.id("users"),
         text: v.string(),
         likes: v.number(),
-        // TODO: fix hardcoded imageUrl, username.
-        imageUrl: v.string(),
-        username: v.string(),
     }).index("by_author", ["authorId"]),
     // TODO: Add counters table
     // counters: defineTable({

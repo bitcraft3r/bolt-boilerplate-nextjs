@@ -6,21 +6,21 @@ import { Heart, Trash2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { DialogDelete } from "./_components/dialog-delete";
+import { Post } from "../../../../convex/posts";
 
 dayjs.extend(relativeTime);
 
 const ShowPosts = () => {
     const { isAuthenticated, isLoading } = useConvexAuth();
     const { user } = useUser();
-    // console.log(`clerk user data`, user);
+    // console.log(`clerk user data`, user); // user.id here is the clerkUserId
 
-    const userId = useStoreUserEffect();
-    let allPosts = useQuery(api.posts.read);
-    const editPost = useMutation(api.posts.update);
+    // @ts-ignore
+    let allPosts: Post[] = useQuery(api.posts.all);
+    const likePost = useMutation(api.posts.like);
 
     // TODO: for allPosts, implement pagination and show with lazy load (show only 10 posts at first load)
 
@@ -34,36 +34,33 @@ const ShowPosts = () => {
 
         // If too many posts found, return truncated version of allPosts
         if (allPosts?.length > postsToDisplay) {
-            const latestPosts = allPosts.slice(0, postsToDisplay).map(post => {
-                return { ...post };
-            });
+            const latestPosts = allPosts.slice(0, postsToDisplay);
             allPosts = latestPosts;
         }
     }
 
-    const handleEdit = (postId: Id<"posts">, likes: number) => {
-        editPost({ id: postId, likes });
+    const handleLike = (postId: Id<"posts">, likes: number) => {
+        likePost({ postId });
     }
-
-    // TODO: for every post, i want to fetch the user's data using the post.authorId. then use the post.author.username post.author.pictureUrl etc to populate the DOM. 
 
     return (
         <div className="text-xs sm:text-sm md:text-base">
             {allPosts?.map((post) => (
                 <div key={post._id} className="border border-t-0 flex p-2 sm:p-3 md:p-4 items-center">
                     <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
-                        <AvatarImage src={post.imageUrl} alt="avatar" />
+                        <AvatarImage src={post.author.imageUrl} alt="avatar" />
                         <AvatarFallback>Liit</AvatarFallback>
                     </Avatar>
                     <div className="ml-4 flex flex-col justify-center items-start">
                         <div className="flex gap-x-1 justify-center items-center">
                             {/* TODO: set max characters for username? */}
-                            <p className="text-muted-foreground">@{post.username}</p>
+                            <p className="text-muted-foreground">@{post?.author.username}</p>
                             <p>·</p>
                             {/* TODO: Customize Day.js using UpdateLocale plugin for even shorter version, e.g. say "5s instead of 5 seconds, 12m instead of 12 minutes, 4h not 4 hours, etc." */}
                             <p className="text-xs">{dayjs(post._creationTime).fromNow(true)}</p>
                             <div>
-                                {(post.authorId === userId)
+                                {/* {(post.authorId === userId) */}
+                                {(post?.author.clerkUserId === user?.id)
                                     ?
                                     <DialogDelete postId={post._id}>
                                         <Button variant="ghost" size="sm" className="rounded-full">
@@ -85,13 +82,13 @@ const ShowPosts = () => {
                             ?
                             <>
                                 <p className="ml-2">{post.likes}</p>
-                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.likes)}>
+                                <Button variant="ghost" size="sm" onClick={() => handleLike(post._id, post.likes)}>
                                     <Heart color="red" fill="red" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
                             :
                             <>
-                                <Button variant="ghost" size="sm" onClick={() => handleEdit(post._id, post.likes)}>
+                                <Button variant="ghost" size="sm" onClick={() => handleLike(post._id, post.likes)}>
                                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
                                 </Button>
                             </>
