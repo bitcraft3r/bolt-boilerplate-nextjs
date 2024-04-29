@@ -11,8 +11,8 @@ import { SignInButton } from "@clerk/nextjs";
 const buttonData = [
     // { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
     // { name: "discord", icon: <BotMessageSquareIcon />, link: "https://discord.com/" },
-    { name: "github", icon: <GithubIcon />, link: "https://github.com/bitcrafter5/bolt-boilerplate-nextjs/" },
-    { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/bitcrafter5" },
+    { name: "github", icon: <GithubIcon />, link: "https://github.com/bitcraft3r/bolt-boilerplate-nextjs/" },
+    { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/bitcraft3r" },
 ];
 
 export const Footer = () => {
