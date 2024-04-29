@@ -4,13 +4,14 @@ import { useUser } from "@clerk/nextjs";
 import { useConvexAuth, useMutation } from "convex/react";
 import { Heart, Trash2 } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DialogDelete } from "./dialog-delete";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { Post } from "@/convex/posts";
 import Link from "next/link";
+import AvatarFallbackLogo from "../../_components/avatar-fallback-logo";
 
 dayjs.extend(relativeTime);
 
@@ -46,7 +47,7 @@ export function Posts(props: { posts: Post[] }) {
                     <Link href={`/${post.author.username}`}>
                         <Avatar className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10">
                             <AvatarImage src={post.author.imageUrl} alt="avatar" />
-                            <AvatarFallback>Liit</AvatarFallback>
+                            <AvatarFallbackLogo />
                         </Avatar>
                     </Link>
                     <div className="ml-4 flex flex-col justify-center items-start">

@@ -13,6 +13,8 @@ export default defineSchema({
         totalLiked: v.optional(v.number()),
         clickedShare: v.optional(v.number()),
         clickedGithub: v.optional(v.number()),
+        clickedTwitter: v.optional(v.number()),
+        clickedTelegram: v.optional(v.number()),
 
         /** NOTES: 
          * Clerk auth login provides following user data `identity` via ctx.auth.getUserIdentity(), used in convex folder:
