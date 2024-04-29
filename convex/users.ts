@@ -22,8 +22,6 @@ export const store = mutation({
             throw new Error("Called storeUser without authentication present");
         }
 
-        // console.log(`identity`, identity);
-
         // Check if we've already stored this identity before.
         const user = await ctx.db
             .query("users")
@@ -32,7 +30,7 @@ export const store = mutation({
             )
             .unique();
         if (user !== null) {
-            // If we've seen this identity before but the imageUrl, email, or username has changed, patch the value.
+            // If we've seen this identity before but the imageUrl, email, username, or wallet has changed, patch the value.
             if (
                 user.imageUrl !== identity.pictureUrl ||
                 user.email !== identity.email ||

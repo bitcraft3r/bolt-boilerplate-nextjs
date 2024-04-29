@@ -41,6 +41,8 @@ CLERK_SECRET_KEY=your_clerk_secret_key
 ```
 Replace Clerk issuerUrl in `@/convex/auth.config.ts` in the providers domain.
 
+If required, setup [middleware as per Clerk documentation](https://clerk.com/docs/references/nextjs/auth-middleware#auth-middleware).
+
 **5. Run the Development Server:**
 ```bash
 npm run dev

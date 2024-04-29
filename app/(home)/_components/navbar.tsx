@@ -49,13 +49,13 @@ export const Navbar = () => {
                 )}
                 {isAuthenticated && !isLoading && (
                     <>
-                        <UserButton afterSignOutUrl="/" />
                         <Button asChild onClick={() => incrementCounter({ name: "github" })}>
                             <Link href="https://github.com/bitcraft3r/bolt-boilerplate-nextjs/" target="_blank" rel="noopener noreferrer">
                                 Download Boilerplate
                                 <GithubIcon className="h-4 w-4 ml-2" />
                             </Link>
                         </Button>
+                        <UserButton afterSignOutUrl="/" />
                     </>
                 )}
                 <ModeToggle />

@@ -4,7 +4,7 @@ import { mutation } from "./_generated/server";
 export const increment = mutation({
     args: { name: v.string() },
     handler: async (ctx, args) => {
-
+        // Fetch the counter by name
         const counter = await ctx.db
             .query("counters")
             .withIndex("by_name", (q) =>
@@ -13,10 +13,11 @@ export const increment = mutation({
             .first();
 
         if (!counter) {
-            throw new Error("Counter not found");
+            throw new Error(`Counter '${args.name}' not found`);
         }
 
-        const increment = await ctx.db.patch(counter?._id!, { count: counter?.count! + 1 })
+        // Increment the counter count
+        const updatedCounter = await ctx.db.patch(counter?._id!, { count: counter?.count! + 1 })
 
         // Increment user-specific counters if user is authenticated
         const identity = await ctx.auth.getUserIdentity();
@@ -47,7 +48,7 @@ export const increment = mutation({
             }
         }
 
-        return increment;
+        return updatedCounter;
     }
 })
 
@@ -56,39 +57,37 @@ export const initialize = mutation({
     handler: async (ctx) => {
 
         const tableRows = [
-            // "twitter",
+            "twitter",
             // "telegram",
             // "discord",
             "github",
             "shareButton",
-            "totalLikes"
+            "totalLikes",
         ]
 
-        async function insertCounters() {
-            for (const row of tableRows) {
-
+        async function insertCounter(row: string) {
+            try {
                 const existingCounter = await ctx.db
                     .query("counters")
-                    .withIndex("by_name", (q) =>
-                        q.eq("name", row)
-                    )
+                    .withIndex("by_name", (q) => q.eq("name", row))
                     .first();
 
                 if (existingCounter) {
                     console.log(`Counter for ${row} already exists`);
                 } else {
-                    // If does not exist, insert the counter
-                    const newCounter = await ctx.db.insert("counters", {
+                    await ctx.db.insert("counters", {
                         name: row,
                         count: 0,
                     });
                     console.log(`Counter for ${row} added`);
                 }
-
+            } catch (error) {
+                console.error(`Error inserting counter for ${row}:`, error);
             }
         }
 
-        insertCounters();
+        // Insert counters concurrently
+        await Promise.all(tableRows.map(row => insertCounter(row)));
     }
 })
 
