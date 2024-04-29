@@ -7,7 +7,7 @@ import { api } from "@/convex/_generated/api";
 const ShareButton = () => {
     const incrementCounter = useMutation(api.counters.increment);
 
-    const tweetText = encodeURIComponent(`⚡ Supercharge your Next.js projects with Bolt Boilerplate! Integrated with @Convex_dev for seamless interactions, @ClerkDev for authentication, and @shadcn for stunning UI. Setup in minutes.\n\nTry now! https://getbolt.vercel.app/ #BoltBoilerplate #NextJS #WebDevelopment @sov6900`);
+    const tweetText = encodeURIComponent(`Supercharge your Next.js projects with Bolt Boilerplate! Integrated with @Convex_dev for seamless interactions, @ClerkDev for authentication, and @shadcn for stunning UI. Setup in minutes.\n\nTry ⚡ now! https://getbolt.vercel.app/ #BoltBoilerplate #NextJS #WebDevelopment @bitcrafter5`);
 
     return (
         <>

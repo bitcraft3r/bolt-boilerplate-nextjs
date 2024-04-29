@@ -13,7 +13,7 @@
 
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/sov3333/bolt-boilerplate-nextjs.git
+git clone https://github.com/bitcrafter5/bolt-boilerplate-nextjs.git
 ```
 
 **2. Install Dependencies:**
