@@ -21,8 +21,10 @@ export const Navbar = () => {
             "z-50 bg-background fixed top-0 flex items-center w-full p-6",
             scrolled && "border-b shadow-sm"
         )}>
-            <Logo />
-            <div className="md:ml-auto justify-end w-full flex items-center gap-x-2">
+            <div className="hidden sm:block">
+                <Logo />
+            </div>
+            <div className="md:ml-auto justify-between sm:justify-end sm:space-between w-full flex items-center gap-x-2">
                 {isLoading && (
                     <LoaderCircle className="w-4 h-4 animate-spin" />
                 )}
