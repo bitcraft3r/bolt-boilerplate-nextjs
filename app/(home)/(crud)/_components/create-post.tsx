@@ -93,11 +93,9 @@ const CreatePost = () => {
                         </Button>
                         :
                         // displayed on landing page when user is not logged in
-                        <SignInButton mode="modal">
-                            <Button className="ml-2 bg-emerald-500 hover:bg-emerald-400" onClick={() => { }}>
-                                Send
-                            </Button>
-                        </SignInButton>
+                        <Button className="ml-2 bg-emerald-500 hover:bg-emerald-400" disabled>
+                            Send
+                        </Button>
                     }
 
                 </form>
