@@ -40,9 +40,9 @@ export const Footer = () => {
                             </Link>
                         </Button>
                         :
-                        <SignInButton mode="modal">
+                        <SignInButton mode="modal" key={index}>
                             <Button
-                                key={index}
+
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => incrementCounter({ name: button.name })}
