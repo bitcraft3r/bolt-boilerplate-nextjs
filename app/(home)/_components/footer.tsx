@@ -9,10 +9,10 @@ import ShareButton from "./share-button";
 import { SignInButton } from "@clerk/nextjs";
 
 const buttonData = [
-    // { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/" },
     // { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
     // { name: "discord", icon: <BotMessageSquareIcon />, link: "https://discord.com/" },
-    { name: "github", icon: <GithubIcon />, link: "https://github.com/sov3333/get-liit/" }
+    { name: "github", icon: <GithubIcon />, link: "https://github.com/sov3333/bolt-boilerplate-nextjs/" },
+    { name: "twitter", icon: <TwitterIcon />, link: "https://twitter.com/sov6900" },
 ];
 
 export const Footer = () => {
@@ -26,7 +26,7 @@ export const Footer = () => {
             <div className="md:ml-auto w-full justify-end flex items-center gap-x-2 text-muted-foreground">
                 {buttonData.map((button, index) => (
                     // make github button a sign in button if user is not authenticated
-                    isAuthenticated
+                    (isAuthenticated || button.name !== "github")
                         ?
                         <Button
                             key={index}
@@ -42,17 +42,13 @@ export const Footer = () => {
                         :
                         <SignInButton mode="modal" key={index}>
                             <Button
-
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => incrementCounter({ name: button.name })}
                             >
-
                                 {button.icon}
-
                             </Button>
                         </SignInButton>
-
                 ))}
                 <ShareButton />
             </div>

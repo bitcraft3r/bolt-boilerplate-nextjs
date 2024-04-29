@@ -2,15 +2,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useConvexAuth, useMutation } from "convex/react";
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
-import { Flame } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import AvatarFallbackLogo from "../../_components/avatar-fallback-logo";
 
 const formSchema = z.object({
     text: z.string()
@@ -55,19 +55,12 @@ const CreatePost = () => {
                                 <Link href={`/${user?.username}`}>
                                     <Avatar className="mr-2 h-8 w-8">
                                         <AvatarImage src={user?.imageUrl} alt="avatar" />
-                                        <AvatarFallback>
-                                            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
-                                            <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
-                                        </AvatarFallback>
+                                        <AvatarFallbackLogo />
                                     </Avatar>
                                 </Link>
                                 :
                                 <Avatar className="mr-2 h-8 w-8">
-                                    {/* <AvatarImage src={user?.imageUrl} alt="avatar" /> */}
-                                    <AvatarFallback>
-                                        <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-100 dark:hidden" />
-                                        <Flame color="red" fill="orange" className="h-[40px] w-[40px] rounded-full p-2 bg-neutral-900 hidden dark:block" />
-                                    </AvatarFallback>
+                                    <AvatarFallbackLogo />
                                 </Avatar>
                         }
                     </div>

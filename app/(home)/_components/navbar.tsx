@@ -2,7 +2,7 @@
 
 import { useConvexAuth } from "convex/react";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { ArrowRight, LoaderCircle } from "lucide-react";
+import { LoaderCircle, Zap } from "lucide-react";
 
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { useScrollTop } from "@/hooks/use-scroll-top";
@@ -35,8 +35,8 @@ export const Navbar = () => {
                         </SignInButton>
                         <SignUpButton mode="modal">
                             <Button size="sm">
-                                Get Liit free
-                                <ArrowRight className="h-4 w-4 ml-2" />
+                                Get Bolt free
+                                <Zap className="h-4 w-4 ml-2" />
                             </Button>
                         </SignUpButton>
                     </>
