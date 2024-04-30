@@ -3,15 +3,15 @@
 import { useConvexAuth, useMutation } from "convex/react";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { GithubIcon, LoaderCircle, Zap } from "lucide-react";
+import Link from "next/link";
 
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { Logo } from "./logo";
-import Link from "next/link";
 import { api } from "@/convex/_generated/api";
+import { Logo } from "./logo";
 
 export const Navbar = () => {
     const userId = useStoreUserEffect();
@@ -19,9 +19,8 @@ export const Navbar = () => {
     const scrolled = useScrollTop();
     const incrementCounter = useMutation(api.counters.increment);
 
-
     return (
-        <div className={cn(
+        <nav className={cn(
             "z-50 bg-background fixed top-0 flex items-center w-full p-6",
             scrolled && "border-b shadow-sm"
         )}>
@@ -60,6 +59,6 @@ export const Navbar = () => {
                 )}
                 <ModeToggle />
             </div>
-        </div>
+        </nav>
     )
 }

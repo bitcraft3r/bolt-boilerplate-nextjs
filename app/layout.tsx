@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/convex-provider";
+import { Navbar } from "./_home/navbar";
+import { Footer } from "./_home/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +44,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="min-h-full flex flex-col justify-between">
+              <Navbar />
+              <main className="pt-28 pb-6 px-6 sm:px-12 md:px-16">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </ThemeProvider>
         </ConvexClientProvider>
       </body>

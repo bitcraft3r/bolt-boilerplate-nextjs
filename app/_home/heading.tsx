@@ -7,7 +7,7 @@ import { LoaderCircle, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Heading = () => {
-    const { isAuthenticated, isLoading } = useConvexAuth();
+    const { isLoading } = useConvexAuth();
 
     return (
         <div className="max-w-3xl space-y-4">

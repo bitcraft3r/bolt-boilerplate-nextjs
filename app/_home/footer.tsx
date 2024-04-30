@@ -1,12 +1,14 @@
+"use client";
+
 import Link from "next/link"
+import { SignInButton } from "@clerk/nextjs";
+import { useConvexAuth, useMutation } from "convex/react";
 import { BotMessageSquareIcon, GithubIcon, SendIcon, TwitterIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Logo } from "./logo"
-import { useConvexAuth, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { Logo } from "./logo"
 import ShareButton from "./share-button";
-import { SignInButton } from "@clerk/nextjs";
 
 const buttonData = [
     // { name: "telegram", icon: <SendIcon />, link: "https://t.me/" },
@@ -21,7 +23,7 @@ export const Footer = () => {
     const incrementCounter = useMutation(api.counters.increment);
 
     return (
-        <div className="flex items-center w-full p-6 bg-background z-50">
+        <footer className="flex items-center w-full p-6 bg-background z-50">
             <Logo />
             <div className="md:ml-auto w-full justify-end flex items-center gap-x-2 text-muted-foreground">
                 {buttonData.map((button, index) => (
@@ -52,6 +54,6 @@ export const Footer = () => {
                 ))}
                 <ShareButton />
             </div>
-        </div>
+        </footer>
     )
 }

@@ -6,6 +6,7 @@ import {
     usePaginatedQuery,
 } from "convex/react";
 import { useEffect } from "react";
+
 import { Posts } from "./posts";
 
 export function PostsScrollView<Query extends PaginatedQueryReference>({

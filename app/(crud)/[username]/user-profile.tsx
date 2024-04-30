@@ -18,7 +18,7 @@ import { api } from "@/convex/_generated/api";
 export function UserProfile({ username }: { username: string }) {
     const user = useQuery(api.users.get, { username });
     return user == null ? null : (
-        <div className="profile p-4 flex items-center">
+        <div className="profile p-4">
             <Card className="w-[350px]">
                 <CardHeader>
                     <CardTitle>Profile</CardTitle>

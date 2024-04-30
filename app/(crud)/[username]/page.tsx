@@ -5,7 +5,7 @@ import { UserPosts } from "./user-posts";
 
 export default function Profile({ params }: { params: { username: string } }) {
     return (
-        <div className="flex flex-col justify-center items-center w-full md:w-[90%] lg:w-[80%]">
+        <div className="flex flex-col justify-center items-center">
             <BackLink />
             <UserProfile username={params.username} />
             <div className="border border-t-2 rounded-sm">

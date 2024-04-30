@@ -7,11 +7,11 @@ import Link from "next/link";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DialogDelete } from "./dialog-delete";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { Post } from "@/convex/posts";
-import AvatarFallbackLogo from "../../_components/avatar-fallback-logo";
+import AvatarFallbackLogo from "./avatar-fallback-logo";
+import { DialogDelete } from "./dialog-delete";
 
 dayjs.extend(relativeTime);
 

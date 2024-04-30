@@ -6,7 +6,6 @@ import { Posts } from "../../_components/posts";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { BackLink } from "../../_components/backlink";
-import { useQuery } from "convex/react";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +17,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     });
 
     return (
-        <div className="px-6">
+        <>
             <BackLink />
             <div className="border border-t-2 rounded-sm mt-4">
                 {
@@ -27,6 +26,6 @@ export default async function Post({ params }: { params: { id: string } }) {
                         : <Posts posts={[post]} />
                 }
             </div>
-        </div>
+        </>
     );
 }

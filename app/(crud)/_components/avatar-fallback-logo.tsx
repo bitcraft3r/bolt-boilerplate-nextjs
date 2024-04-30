@@ -1,5 +1,6 @@
-import { AvatarFallback } from "@/components/ui/avatar";
 import { Zap } from "lucide-react";
+
+import { AvatarFallback } from "@/components/ui/avatar";
 
 const AvatarFallbackLogo = () => {
     return (<AvatarFallback>

@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
+import { Zap } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Zap } from "lucide-react";
 
 const font = Poppins({
     subsets: ["latin"],
