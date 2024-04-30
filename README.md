@@ -1,28 +1,34 @@
-# Bolt Boilerplate
+# Bolt Boilerplate ⚡
 
-**Bolt Boilerplate** is a [Next.js](https://nextjs.org/) framework integrated with Convex for seamless interactions, Clerk for authentication, and Shadcn for stunning UI. It's designed to supercharge your web development projects, allowing you to build dynamic web applications at lightning speed and with ease.
+**Bolt Boilerplate** is a [Next.js](https://nextjs.org/) framework integrated with [Convex](https://docs.convex.dev/quickstart/nextjs) real-time database for seamless interactions, [Clerk](https://clerk.com/docs/quickstarts/nextjs) for authentication, and [Shadcn/ui](https://ui.shadcn.com/docs/installation/next) for stunning and customizable UI. 
+
+It's designed to supercharge your web development projects, allowing you to build dynamic web applications at lightning speed and with ease.
 
 ## Features
 
-- **Seamless Interactions**: Integrated with [Convex](https://www.convex.dev/) for real-time updates and interactions.
-- **Secure Authentication**: Utilizes [Clerk](https://clerk.com/) for authentication and user management, ensuring a secure login experience.
-- **Stunning UI**: Styled with [Shadcn](https://ui.shadcn.com/) to provide visually appealing and customizable UI components.
-- **Easy Setup**: Get started in minutes with Bolt Boilerplate's straightforward setup process.
+- ✅ Setup in 3 minutes!
+- ✅ Best practices for Next.js App router v14
+- ✅ Clean code structure and organization
+- ✅ Lightweight and easily customizable
+- ✅ Metadata, opengraph, SEO friendly
 
 ## Quick Start
 
 **1. Clone the Repository:**
+
 ```bash
 git clone https://github.com/bitcraft3r/bolt-boilerplate-nextjs.git
 ```
 
 **2. Install Dependencies:**
+
 ```bash
 cd bolt-boilerplate-nextjs
 npm install
 ```
 
 **3. Setup Convex Development Server:**
+
 Run the Convex development server and create a new project:
 ```bash
 npx convex dev
@@ -34,6 +40,7 @@ NEXT_PUBLIC_CONVEX_URL=your_public_convex_url
 ```
 
 **4. Setup Clerk Authentication:**
+
 Setup a Clerk project and add the following environment variables to the .env.local file:
 ```plaintext
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
@@ -43,18 +50,21 @@ In your Clerk project, create a JWT Template, select Convex, then make sure to c
 
 If required, setup [middleware as per Clerk documentation](https://clerk.com/docs/references/nextjs/auth-middleware#auth-middleware).
 
-**5. Add environment variable for app URL** 
+**5. Add environment variable for app URL:** 
+
 Add the following environment variable to the .env.local file:
 ```plaintext
 NEXT_PUBLIC_URL=http://localhost:3000/
 ```
 
 **6. Run the Development Server:**
+
 ```bash
 npm run dev
 ```
 
 **7. Open Your Browser:**
+
 Open http://localhost:3000 to view the app.
 
 ## Contributing
@@ -65,9 +75,10 @@ Contributions are welcome! Whether you want to report a bug, request a feature, 
 
 This project is licensed under the MIT License.
 
-## Acknowledgements
+## Resources
 
-- Next.js: The React framework for building server-side rendered and statically generated web applications.
-- Convex: Real-time database for seamless interactions.
-- Clerk: Authentication and user management made easy.
-- Shadcn: Styling library for customizable UI components.
+- [Convex Template with Next.js 13 App Router](https://www.convex.dev/templates/nextjs-app-router)
+- [Fullstack Notion Clone: Next.js 13, React, Convex, Tailwind | Full Course 2023](https://youtu.be/0OaDyjB9Ib8)
+- [A quick start guide for using Convex with Next.js](https://youtu.be/vaQZYRSiimI)
+- [How To Setup: NextJS + Convex + ShadCN + Stripe + Tailwind CSS + Typescript + React | Explained](https://youtu.be/bTY0fa8p8D0)
+- [Building a Subscription Based SaaS with my Favorite Tech Stack (Next.js, Stripe, Convex, Clerk)](https://youtu.be/Vjtn9pWAZDI)
