@@ -2,8 +2,6 @@
 
 **Bolt Boilerplate** is a [Next.js](https://nextjs.org/) framework integrated with [Convex](https://docs.convex.dev/quickstart/nextjs) real-time database for seamless interactions, [Clerk](https://clerk.com/docs/quickstarts/nextjs) for authentication, and [Shadcn/ui](https://ui.shadcn.com/docs/installation/next) for stunning and customizable UI. 
 
-![Bolt Boilerplate Landing page wireframe](https://github.com/bitcraft3r/bolt-boilerplate-nextjs/assets/8282076/ee300905-0577-4d4b-a1d3-c248a31f90d0)
-
 Designed to streamline your web development process, Bolt eliminates the hassle of setup by providing full CRUD functionality, seamless database integration, and user authentication right from the start. 
 
 Say goodbye to the complexities of React state management as Bolt integrates Convex, simplifying your development workflow. Whether you're a seasoned developer or just starting out, Bolt empowers you to build stunning and dynamic web applications effortlessly, allowing you to focus on bringing your ideas to life.
@@ -15,6 +13,8 @@ Say goodbye to the complexities of React state management as Bolt integrates Con
 - ✅ Clean code structure and organization
 - ✅ Lightweight and easily customizable
 - ✅ Metadata, opengraph, SEO friendly
+
+![Bolt Boilerplate Landing page wireframe](https://github.com/bitcraft3r/bolt-boilerplate-nextjs/assets/8282076/ee300905-0577-4d4b-a1d3-c248a31f90d0)
 
 ## Quick Start
 
