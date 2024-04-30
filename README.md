@@ -39,16 +39,22 @@ Setup a Clerk project and add the following environment variables to the .env.lo
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 ```
-Replace Clerk issuerUrl in `@/convex/auth.config.ts` in the providers domain.
+In your Clerk project, create a JWT Template, and make sure to click Save changes. Copy the Issuer URL in the JWT Template to replace in `@/convex/auth.config.ts` in the providers domain.
 
 If required, setup [middleware as per Clerk documentation](https://clerk.com/docs/references/nextjs/auth-middleware#auth-middleware).
 
-**5. Run the Development Server:**
+**5. Add the following ** 
+Add the following environment variable to the .env.local file:
+```plaintext
+NEXT_PUBLIC_URL=http://localhost:3000/
+```
+
+**6. Run the Development Server:**
 ```bash
 npm run dev
 ```
 
-**6. Open Your Browser:**
+**7. Open Your Browser:**
 Open http://localhost:3000 to view the app.
 
 ## Contributing
