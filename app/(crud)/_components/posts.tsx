@@ -21,13 +21,11 @@ export function Posts(props: { posts: Post[] }) {
     const { user } = useUser();
 
     const likePost = useMutation(api.posts.like);
-    const incrementCounter = useMutation(api.counters.increment);
 
     const truncatedPosts = !isAuthenticated && !isLoading ? props.posts.slice(0, 5) : props.posts;
 
     const handleLike = (postId: Id<"posts">, likes: number) => {
         likePost({ postId });
-        incrementCounter({ name: "totalLikes" });
     }
 
     const renderLikeButton = (post: Post) => {

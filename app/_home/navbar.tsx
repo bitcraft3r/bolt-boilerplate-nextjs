@@ -1,6 +1,6 @@
 "use client";
 
-import { useConvexAuth, useMutation } from "convex/react";
+import { useConvexAuth } from "convex/react";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { GithubIcon, LoaderCircle, Zap } from "lucide-react";
 import Link from "next/link";
@@ -10,14 +10,12 @@ import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
 import { Logo } from "./logo";
 
 export const Navbar = () => {
     const userId = useStoreUserEffect();
     const { isAuthenticated, isLoading } = useConvexAuth();
     const scrolled = useScrollTop();
-    const incrementCounter = useMutation(api.counters.increment);
 
     return (
         <nav className={cn(
@@ -48,9 +46,9 @@ export const Navbar = () => {
                 )}
                 {isAuthenticated && !isLoading && (
                     <>
-                        <Button asChild onClick={() => incrementCounter({ name: "github" })}>
+                        <Button asChild>
                             <Link href="https://github.com/bitcraft3r/bolt-boilerplate-nextjs/" target="_blank" rel="noopener noreferrer">
-                                Download Boilerplate
+                                Get Boilerplate
                                 <GithubIcon className="h-4 w-4 ml-2" />
                             </Link>
                         </Button>
