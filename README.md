@@ -18,6 +18,11 @@ Say goodbye to the complexities of React state management as Bolt integrates Con
 
 ## Quick Start
 
+**0. Install the necessary tools**
+
+- Node.js: If you need to install that go here: https://nodejs.org/
+- pnpm: If you need to install that go here: https://pnpm.io/installation
+
 **1. Clone the Repository:**
 
 ```bash
@@ -28,14 +33,14 @@ git clone https://github.com/bitcraft3r/bolt-boilerplate-nextjs.git
 
 ```bash
 cd bolt-boilerplate-nextjs
-npm install
+pnpm i
 ```
 
 **3. Setup Convex Development Server:**
 
 Run the Convex development server and create a new project:
 ```bash
-npx convex dev
+pnpx convex dev
 ``` 
 This will auto-populate `.env.local` file with the following:
 ```plaintext
@@ -50,7 +55,11 @@ Setup a Clerk project and add the following environment variables to the .env.lo
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 ```
-In your Clerk project, create a JWT Template, select Convex, then make sure to click Save changes. Copy the Issuer URL in the JWT Template to replace in `@/convex/auth.config.ts` in the providers domain.
+In your Clerk project, create a JWT Template, select Convex, then make sure to click Save changes.
+Copy the Issuer URL in the JWT Template to set in the Convex dashboard as an environment variable.
+
+![Set Clerk Issuer URL in Convex Dashboard](https://github.com/bitcraft3r/bolt-boilerplate-nextjs/assets/77451351/134b40ae-edc2-402d-95e0-3e63172f72f4)
+
 
 If required, setup [middleware as per Clerk documentation](https://clerk.com/docs/references/nextjs/auth-middleware#auth-middleware).
 
@@ -64,7 +73,7 @@ NEXT_PUBLIC_URL=http://localhost:3000/
 **6. Run the Development Server:**
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 **7. Open Your Browser:**
